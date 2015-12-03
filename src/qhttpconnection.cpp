@@ -105,6 +105,11 @@ void QHttpConnection::parseRequest()
     while (m_socket->bytesAvailable()) {
         QByteArray arr = m_socket->readAll();
         http_parser_execute(m_parser, m_parserSettings, arr.constData(), arr.size());
+        http_errno err = HTTP_PARSER_ERRNO(m_parser);
+        if (err != HPE_OK) {
+            qWarning() << "QHttpConnection::parseRequest()" << http_errno_name(err) << http_errno_description(err);
+            m_socket->abort();
+        }
     }
 }
 
