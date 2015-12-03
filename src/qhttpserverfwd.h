@@ -38,8 +38,10 @@ class QHttpRequest;
 class QHttpResponse;
 
 // Qt
+QT_BEGIN_NAMESPACE
 class QTcpServer;
 class QTcpSocket;
+QT_END_NAMESPACE
 
 // http_parser
 struct http_parser_settings;
